@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+products_df = pd.read_csv('path of your excel/csv file')
+/*Do the neccessary data preprocessing*/
+/*Do the train-test split*/
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test = train_test_split(features_dummy,target,test_size = 0.4)
+/*I am using Gradient Boosting algorithm here*/
+from sklearn.ensemble import GradientBoostingClassifier
+GBC = GradientBoostingClassifier(learning_rate = 0.2, max_depth = 4, min_samples_leaf = 0.1, min_samples_split = 0.2090909090909091, n_estimators = 10)
+model = GBC.fit(X_train,y_train)
+print("Training Accuracy: ",model.score(X_train,y_train))
+print("Testing Accuracy: ",model.score(X_test,y_test))
+print("Training Accuracy: ",model1.score(X_train,y_train))
+print("Testing Accuracy: ",model1.score(X_test,y_test))
+/*Partial Dependence - PD Plots*/
+from sklearn.ensemble.partial_dependence import partial_dependence, plot_partial_dependence
+figs,axes = plot_partial_dependence(model,       
+                                   features=[], # column numbers of plots we want to show
+                                   X=X_train,            # raw predictors data.
+                                   feature_names=[''], # labels on graphs
+                                   grid_resolution=10)
+#figs.suptitle('Partial dependence')
+plt.subplots_adjust(top=0.9,right = 0.9, left = 0.125, bottom=0.1, wspace=0.2, hspace=0.2)
+figs.tight_layout()
